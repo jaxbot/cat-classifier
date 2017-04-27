@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Cat Classifier</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.1/angular.min.js"></script>
+		<script src="static/js/classifier.js"></script>
+		<link rel="stylesheet" href="static/img/styles.css">
+	</head>
+	<body ng-app="app">
+		<div ng-controller="IndexCtrl as vm" class="index">
+			<h1>Cat Classifier</h1>
+			<img class="cat-image" ng-src="{{vm.imageData}}" ng-if="vm.imageData">
+
+			<div ng-show="!vm.loading && !vm.response">
+				<input type="file" id="upload-element">
+				<button ng-click="vm.uploadImage()">Classify!</button>
+			</div>
+			<div ng-if="vm.loading">
+				<div class="spinner">
+					<div class="rect1"></div>
+					<div class="rect2"></div>
+					<div class="rect3"></div>
+					<div class="rect4"></div>
+					<div class="rect5"></div>
+				</div>
+			</div>
+			<div ng-if="vm.response" class="response">
+				<div class="score-title">
+					Korra
+					<div class="score-result">{{ vm.response.korra }}</div>
+				</div>
+				<div class="score-title">
+					Jinora
+					<div class="score-result">{{ vm.response.jinora }}</div>
+				</div>
+				<div class="score-title">
+					Negatives
+					<div class="score-result">{{ vm.response.negatives }}</div>
+				</div>
+				<button ng-click="vm.reset()">Try another</button>
+			</div>
+		</div>
+	</body>
+</html>
